@@ -1,0 +1,40 @@
+.hero {
+    background-color: #369;
+    border-radius: 0.5rem;
+    padding: 12px;
+    padding-left: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.hero:hover {
+    cursor: pointer;
+    background-color: rgb(102, 156, 209);
+}
+
+.hero a {
+    text-decoration: none;
+    color: white;
+}
+
+.heroId {
+    font-weight: bold;
+    margin-right: 10px;
+    background-color: rgb(20, 48, 75);
+    padding: 12px;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.heroList {
+    list-style: none;
+    width: 20em;
+}
+
+button {
+    border-radius: 0.5rem;
+    padding: 10px;
+    border: none;
+    background-color: rgb(20, 48, 75);
+    color: white;
+    margin: 10px;
+}
