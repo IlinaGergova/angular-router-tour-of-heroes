@@ -1,0 +1,44 @@
+.crisisList li {
+    background-color: #369;
+    border-radius: 0.5rem;
+    padding: 12px;
+    padding-left: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.crisisList li:hover {
+    cursor: pointer;
+    background-color: rgb(102, 156, 209);
+}
+
+.crisisList a {
+    text-decoration: none;
+    color: white;
+}
+
+.crisisId {
+    font-weight: bold;
+    margin-right: 10px;
+    background-color: rgb(20, 48, 75);
+    padding: 12px;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.crisisList {
+    list-style: none;
+    width: 20em;
+}
+
+button {
+    border-radius: 0.5rem;
+    padding: 10px;
+    border: none;
+    background-color: rgb(20, 48, 75);
+    color: white;
+    margin: 10px;
+}
+
+.crisisList .selected {
+    background-color: darkgray;
+}
