@@ -1,4 +1,4 @@
-.hero {
+.heroList li {
     background-color: #369;
     border-radius: 0.5rem;
     padding: 12px;
@@ -7,12 +7,12 @@
     font-size: 20px;
 }
 
-.hero:hover {
+.heroList li:hover {
     cursor: pointer;
     background-color: rgb(102, 156, 209);
 }
 
-.hero a {
+.heroList a {
     text-decoration: none;
     color: white;
 }
@@ -37,4 +37,8 @@ button {
     background-color: rgb(20, 48, 75);
     color: white;
     margin: 10px;
+}
+
+.heroList .selected {
+    background-color: darkgray;
 }

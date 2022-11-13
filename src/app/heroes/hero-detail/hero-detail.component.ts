@@ -23,6 +23,9 @@ export class HeroDetailComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.heroService.getHero(params.get('id')!))
     );
+    // const id = this.route.snapshot.paramMap.get('id')!;
+    // this.hero$ = this.heroService.getHero(id);
+
   }
 
   gotoHeroes(hero: Hero) {
