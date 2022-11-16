@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./crisis-center/crisis-center.module').then(m => m.CrisesModule),
     data: { preload: true }
   },
-  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
+  { path: '', redirectTo: '/superheroes', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeroesModule } from './heroes/heroes.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
+import { Router } from '@angular/router';
 @NgModule({
   imports: [
     BrowserModule,
@@ -29,4 +30,10 @@ import { AuthGuard } from './auth/auth.guard';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  // constructor(router: Router) {
+  //   // Use a custom replacer to display function names in the route configs
+  //   const replacer = (key, value) => (typeof value === 'function') ? value.name : value;
+
+  //   console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
+  // }
 }
