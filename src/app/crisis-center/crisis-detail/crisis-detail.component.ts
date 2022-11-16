@@ -4,6 +4,7 @@ import { CrisisService } from '../crisis.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { catchError, Observable, switchMap } from 'rxjs';
+import { DialogService } from 'src/app/dialog.service';
 
 @Component({
   selector: 'app-crisis-detail',
@@ -12,30 +13,51 @@ import { catchError, Observable, switchMap } from 'rxjs';
 })
 export class CrisisDetailComponent implements OnInit {
 
-  crisis$?: Observable<Crisis>;
+  crisis!: Crisis;
+  editName = '';
 
-  constructor(private route: ActivatedRoute,
-    private crisisService: CrisisService,
-    private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialogService: DialogService
+  ) { }
 
-  ngOnInit(): void {
-    this.crisis$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.crisisService.getCrisis(params.get('id')!))
-    );
-    // const id = this.route.snapshot.paramMap.get('id')!;
-    // this.hero$ = this.heroService.getHero(id);
-
+  ngOnInit() {
+    this.route.data
+      .subscribe(data => {
+        const crisis: Crisis = data['crisis'];
+        this.editName = crisis.name;
+        this.crisis = crisis;
+      });
   }
 
-  gotoCrises(crisis: Crisis) {
-    const crisisId = crisis ? crisis.id : null;
+  cancel() {
+    this.gotoCrises();
+  }
 
-    //absolute path (that begins with a slash)
-    // this.router.navigate(['/crisis-center', { id: crisisId, foo: 'foo' }]);
+  save() {
+    this.crisis.name = this.editName;
+    this.gotoCrises();
+  }
 
-    // relative path:
+  canDeactivate(): Observable<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (!this.crisis || this.crisis.name === this.editName) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // observable which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
+  }
+
+  gotoCrises() {
+    const crisisId = this.crisis ? this.crisis.id : null;
+    // Pass along the crisis id if available
+    // so that the CrisisListComponent can select that crisis.
+    // Add a totally useless `foo` parameter for kicks.
+    // Relative navigation back to the crises
     this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
   }
+
 
 }

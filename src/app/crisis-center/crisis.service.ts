@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Crisis } from './crisis';
 import { CRISES } from './mock-crises';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MessageService } from '../message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -12,18 +12,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class CrisisService {
 
-  private crisesUrl = 'api/crisis-center';
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
+  static nextCrisisId = 100;
+  private crises$: BehaviorSubject<Crisis[]> = new BehaviorSubject<Crisis[]>(CRISES);
   constructor(private messageService: MessageService) { }
 
-  getCrises(): Observable<Crisis[]> {
-    this.messageService.add('CrisisService: fetched crises');
-    return of(CRISES);
-  }
+  getCrises() { return this.crises$; }
 
   getCrisis(id: number | string) {
     return this.getCrises().pipe(
